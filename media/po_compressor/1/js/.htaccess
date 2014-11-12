@@ -1,0 +1,6 @@
+<ifmodule mod_deflate.c>
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+AddOutputFilterByType DEFLATE text/css
+SetOutputFilter DEFLAT
+</ifmodule>

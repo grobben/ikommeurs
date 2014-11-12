@@ -1,0 +1,22 @@
+/*Ajustment in table review onestepcheckout*/
+tbody tr td.a-center h3.product-name {
+	max-width: 180px;
+}
+/* Form Validation */
+/** Error Fields **/
+input.mage-error {
+	background: none repeat scroll 0 0 #faebe7 !important;
+    border: 1px dashed #eb340a !important;
+}
+.form-list .validation-advice, 
+.form-list .mage-error {
+    background: url("../images/validation_advice_bg.gif") no-repeat scroll 2px 0 rgba(0, 0, 0, 0);
+    clear: both;
+    color: #eb340a;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 13px;
+    margin: 3px 0 0;
+    min-height: 13px;
+    padding-left: 17px;
+}

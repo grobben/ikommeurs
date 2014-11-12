@@ -1,0 +1,71 @@
+<div id="confirm_dialog" class="white-popup mfp-hide">
+    <p class="content"></p>
+    <div class="button-set">
+        <button  type="button" class="button btn_ok">
+            <span><span class="btn_text"><?php echo $this->__('Ok');?></span></span>
+        </button>
+        <button  type="button" class="button btn_cancel">
+            <span><span class="btn_text"><?php echo $this->__('Cancel');?></span></span>
+        </button>
+    </div>
+</div>
+<?php echo $this->helper('lotusbreath_onestepcheckout/js')->getTranslatorScript() ?>
+<script type="text/javascript">
+    //<![CDATA[
+
+    var start = new Date();
+    head.js(
+        /*"<?php echo $this->getSkinUrl('onestepcheckout/jquery/jquery-ui.js') ?>",*/
+
+        /*"<?php echo $this->getSkinUrl('onestepcheckout/jquery/jquery.tmpl.min.js') ?>",*/
+        "<?php echo $this->getSkinUrl('onestepcheckout/jquery/jquery.validate.js') ?>",
+        "<?php echo $this->getSkinUrl('onestepcheckout/jquery/jquery.metadata.js') ?>",
+        //"<?php echo $this->getSkinUrl('onestepcheckout/mage/translate.js') ?>",
+        "<?php echo $this->getSkinUrl('onestepcheckout/mage/validation.js') ?>",
+        "<?php echo $this->getSkinUrl('onestepcheckout/mage/validation/validation.js') ?>",
+        "<?php echo $this->getSkinUrl('onestepcheckout/mage/validation/cc-type.js') ?>",
+        "<?php echo $this->getSkinUrl('onestepcheckout/jquery/spin.min.js') ?>"
+    );
+    head.js("<?php echo $this->getSkinUrl('onestepcheckout/jquery/jquery.blockUI.js') ?>", function () {
+        head.js(
+            //"http://malsup.github.io/jquery.blockUI.js",
+            "<?php echo $this->getSkinUrl('onestepcheckout/opcheckout.js') ?>"
+        );
+    });
+    window.addEventListener('load', function () {
+        (function ($, window) {
+            $("#checkoutSteps").onestepcheckout(
+            {
+                autoDetectLocation : '<?php echo Mage::getStoreConfigFlag('lotusbreath_onestepcheckout/general/autodetectlocation');?>',
+                submitUrl: '<?php echo Mage::helper('onestepcheckout')->getSubmitUrl();?>',
+                saveStepUrl: '<?php echo Mage::helper('onestepcheckout')->getSaveStepUrl();?>',
+
+                review: {
+                    saveUrl: '<?php echo $this->getUrl('onestepcheckout/index/savePost') ?>',
+                    successUrl: '<?php echo $this->getUrl('checkout/onepage/success') ?>',
+                    updateCarUrl: '<?php echo $this->getUrl('onestepcheckout/index/updateCart') ?>',
+                    clearCartItemUrl : '<?php echo $this->getUrl('onestepcheckout/index/clearCartItem') ?>',
+                    corfirmRemoveCartItemMsg : '<?php echo $this->__('Are you sure you would like to remove this item from the shopping cart?');?>'
+                },
+                coupon: {
+                    applyCouponUrl: '<?php echo $this->getUrl('onestepcheckout/index/applyCoupon') ?>',
+                },
+                termErrorMsg: '<?php echo $this->__('Please accept terms and conditions')?>',
+                billing : {
+                    checkExistsUrl : '<?php echo $this->getUrl('onestepcheckout/index/checkExistsEmail') ?>',
+                    checkExistsMsg: '<?php echo $this->__('There is already a customer registered using this email address. Please login using this email address or enter a different email address to register your account.');?>',
+                    'alwaysUseShippingAsBilling' : '<?php echo Mage::getStoreConfig('lotusbreath_onestepcheckout/shippingaddress/alwaysusesameasbilling');?>'
+                },
+                login : {
+                    loginUrl : '<?php echo $this->getUrl('onestepcheckout/index/login') ?>'
+                },
+                confirmCheckEmail : {
+                    login_btn_text: '<?php echo $this->__("Login Now");?>',
+                    cancel_btn_text: '<?php echo $this->__("Change your email");?>',
+                }
+            }
+            );
+        })(jQuery, window);
+    }, false);
+    //]]>
+ </script>
